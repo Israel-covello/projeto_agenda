@@ -1,9 +1,10 @@
 from django.http.response import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Contato
 from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
+from django.contrib import messages
 
 
 def index(request):
@@ -29,8 +30,13 @@ def ver_contato(request, contato_id):
 def busca(request):
     termo = request.GET.get('termo')
 
-    if termo is None:
-        raise Http404()
+    if termo is None or not termo:
+        messages.add_message(
+            request, messages.ERROR, 
+            'Campo de Pesquisa não pode ficar vazio!'
+        )
+        return redirect('index.html')
+
     campos = Concat('nome', Value(' '), 'sobrenome')
     
     contatos = Contato.objects.annotate(
