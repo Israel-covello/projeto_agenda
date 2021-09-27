@@ -35,7 +35,7 @@ def busca(request):
             request, messages.ERROR, 
             'Campo de Pesquisa não pode ficar vazio!'
         )
-        return redirect('index.html')
+        return redirect('index')
 
     campos = Concat('nome', Value(' '), 'sobrenome')
     
@@ -47,8 +47,10 @@ def busca(request):
     )
 
     paginator = Paginator(contatos, 8)
+
     page = request.GET.get('p')
     contatos = paginator.get_page(page)
+
     return render(request, 'contatos/busca.html',{
         'contatos': contatos
     })
