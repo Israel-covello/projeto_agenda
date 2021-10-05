@@ -10,4 +10,11 @@
 
 ##
 
+Deploy do projeto no Google Could: 
+- URL home: http://34.95.249.13/
+- URL cadastro: http://34.95.249.13/accounts/cadastro/
+- URL para login: http://34.95.249.13/accounts/login/
+
+## 
+
 Em andamento ..
